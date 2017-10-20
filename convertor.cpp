@@ -51,3 +51,26 @@ double delta(QRgb a,QRgb b){
   int db=qBlue(a)-qBlue(b);
   return 0.2126 * dr * dr + 0.7152 * dg * dg + 0.0722 * db * db;
 }
+
+int deflate(QRgb rgb){
+ int idxR = qRed(rgb)*255*(reds-1)/0xFF+0.5;
+ int idxG = qGreen(rgb) * 255 * (greens - 1.0) / 0xFF + 0.5;
+ int idxB = qBlue(rgb)* 255 * (blues - 1.0) / 0xFF + 0.5;
+ int compressed = 16 + idxR * greens * blues + idxG * blues + idxB;
+}
+
+QRgb inflate(int value){
+    if(value <16){
+        return greys[value];
+    }else{
+        int index = value-16;
+        float idxB=index%blues;
+        float idxG=(index/blues)%greens;
+        float idxR=(index/blues/greens)%reds;
+        int r = (idxR*0xFF/(reds-1)+0.5);
+        int g = (idxG*0xFF/(greens-1)+0.5);
+        int b = (idxB*0xFF/(blues-1)+0.5);
+        QRgb rgb = qRgb(r,g,b);
+        return rgb;
+    }
+}
