@@ -4,6 +4,10 @@
 #include <QFileDialog>
 #include <QImage>
 #include <QRgb>
+#include <map>
+#include <utility>
+#include <array>
+#include <vector>
 
 struct Color
 {
@@ -22,15 +26,24 @@ void Convertor::convert(QPixmap pixmap, QString pathSave)
 {
     QImage img = pixmap.toImage();
 
-    int imageWight = img.width();
+    int imageWidth = img.width();
     int imageHeight = img.height();
-    Color basicColors[imageWight][imageHeight];
-    for(int i=0;i < imageWight;i++){
-        for(int j=0;j < imageHeight;j++){
+    std::vector<std::vector<Color>> basicColors(imageHeight);
+    for(int i=0;i < imageHeight;i++){
+        for(int j=0;j < imageWidth;j++){
+            std::vector<Color> column(imageWidth);
             QRgb rgb = img.pixel(i,j);
-            basicColors[i][j].r = qRed(rgb);
-            basicColors[i][j].g = qGreen(rgb);
-            basicColors[i][j].b = qBlue(rgb);
+            column[j].r = qRed(rgb);
+            column[j].g = qGreen(rgb);
+            column[j].b = qBlue(rgb);
+            basicColors[i] = column;
+        }
+    }
+    std::map<std::pair<QRgb, QRgb>, int> colors;
+    for(int i=0;i<imageWidth;i++){
+        for(int j=0;j<imageHeight/2;j++){
+        auto pair(colors[basicColors[i][j*2],basicColors[i][j*2+1]]);
+        colors[pair]++;
         }
     }
 }
@@ -58,7 +71,7 @@ int deflate(QRgb rgb){
  int idxB = qBlue(rgb)* 255 * (blues - 1.0) / 0xFF + 0.5;
  int compressed = 16 + idxR * greens * blues + idxG * blues + idxB;
  for(int i=0;i<16;i++){
-     if(delta(inflate(compressed),rgb)<delta(inflate(greys[i]),rgb))
+     if(delta(inflate(compressed),rgb)<delta(inflate(i),rgb))
          return compressed;
      else
          return greys[i];
@@ -66,7 +79,7 @@ int deflate(QRgb rgb){
 }
 
 QRgb inflate(int value){
-    if(value <16){
+    if(value < 16){
         return greys[value];
     }else{
         int index = value-16;
