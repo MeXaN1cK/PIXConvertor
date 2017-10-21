@@ -12,6 +12,9 @@ struct Color
 {
     uint8_t r,g,b;
 };
+struct Len{
+    float x, y;
+};
 
 const int reds=6;
 const int greens=8;
@@ -57,8 +60,9 @@ void encodeColor(QRgb rgb,Color &colRGB){
     colRGB.g=g;
     colRGB.b=b;
 }
-float encodeLen(int len){
-    return len/256,len%256;
+void encodeLen(int len,Len &llen){
+    llen.x=len/256;
+    llen.y=len%256;
 }
 
 double delta(QRgb a,QRgb b){
