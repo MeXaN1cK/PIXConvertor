@@ -1,13 +1,11 @@
 #include "convertor.h"
-#include <QPixmap>
 #include <QString>
 #include <QFileDialog>
 #include <QImage>
 #include <QRgb>
 #include <map>
-#include <utility>
-#include <array>
 #include <vector>
+#include <utility>
 
 struct Color
 {
@@ -39,13 +37,15 @@ void Convertor::convert(QPixmap pixmap, QString pathSave)
             basicColors[i] = column;
         }
     }
-    std::map<std::pair<QRgb, QRgb>, int> colors;
-    for(int i=0;i<imageWidth;i++){
-        for(int j=0;j<imageHeight/2;j++){
-        auto pair(colors[basicColors[i][j*2],basicColors[i][j*2+1]]);
-        colors[pair]++;
-        }
-    }
+    std::map<std::pair<Color, Color>*, int> colors;
+    for(int i=0;i<imageWidth;i++){ 
+         for(int j=0;j<imageHeight/2;j++){
+           Color bcolor = basicColors[i][j*2]; // background color
+           Color fcolor = basicColors[i][j*2+1]; // foreground color
+           std::pair<Color, Color> pr(bcolor, fcolor);
+           colors[&pr]++;
+         }
+     }
 }
 
 int encodeColor(QRgb rgb){
