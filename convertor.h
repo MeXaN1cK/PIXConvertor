@@ -12,7 +12,7 @@ QRgb inflate(int);
 class Convertor
 {
 public:
-    void convert(QPixmap pixmap,QString pathSave);
+    void convert(QPixmap pixmap);
 };
 
 #endif // CONVERTOR_H

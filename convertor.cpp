@@ -1,5 +1,6 @@
 #include "convertor.h"
 #include <QString>
+#include <QPixmap>
 #include <QFileDialog>
 #include <QImage>
 #include <QRgb>
@@ -20,7 +21,7 @@ const float greys[16]={
 0.52734375, 0.5859375, 0.64453125, 0.703125, 0.76171875, 0.8203125, 0.87890625, 0.9375
 };
 
-void Convertor::convert(QPixmap pixmap, QString pathSave)
+void Convertor::convert(QPixmap pixmap)
 {
     QImage img = pixmap.toImage();
 
@@ -38,7 +39,7 @@ void Convertor::convert(QPixmap pixmap, QString pathSave)
         }
     }
     std::map<std::pair<Color, Color>*, int> colors;
-    for(int i=0;i<imageWidth;i++){ 
+    for(int i=0;i<imageWidth;i++){
          for(int j=0;j<imageHeight/2;j++){
            Color bcolor = basicColors[i][j*2]; // background color
            Color fcolor = basicColors[i][j*2+1]; // foreground color
@@ -48,11 +49,13 @@ void Convertor::convert(QPixmap pixmap, QString pathSave)
      }
 }
 
-int encodeColor(QRgb rgb){
+void encodeColor(QRgb rgb,Color &colRGB){
     int r=qRed(rgb)*255;
     int g=qGreen(rgb)*255;
     int b=qBlue(rgb)*255;
-    return r,g,b;
+    colRGB.r=r;
+    colRGB.g=g;
+    colRGB.b=b;
 }
 float encodeLen(int len){
     return len/256,len%256;
