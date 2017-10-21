@@ -30,26 +30,22 @@ void Convertor::convert(QPixmap pixmap)
 
     int imageWidth = img.width();
     int imageHeight = img.height();
-    std::vector<std::vector<Color>> basicColors(imageHeight);
-    for(int i=0;i < imageHeight;i++){
-        for(int j=0;j < imageWidth;j++){
-            std::vector<Color> column(imageWidth);
+    Color basicColors[160][100];
+    for(int i=0;i < imageWidth;i++){
+        for(int j=0;j < imageHeight;j++){
             QRgb rgb = img.pixel(i,j);
-            column[j].r = qRed(rgb);
-            column[j].g = qGreen(rgb);
-            column[j].b = qBlue(rgb);
-            basicColors[i] = column;
+            basicColors[i][j].r = qRed(rgb);
+            basicColors[i][j].g = qGreen(rgb);
+            basicColors[i][j].b = qBlue(rgb);
         }
     }
-    std::map<std::pair<Color, Color>*, int> colors;
+    int cols[16000];
     for(int i=0;i<imageWidth;i++){
-         for(int j=0;j<imageHeight/2;j++){
-           Color bcolor = basicColors[i][j*2]; // background color
-           Color fcolor = basicColors[i][j*2+1]; // foreground color
-           std::pair<Color, Color> pr(bcolor, fcolor);
-           colors[&pr]++;
-         }
-     }
+        for(int j=0;j<imageHeight;j++){
+            int num = basicColors[i][j].r+(basicColors[i][j].b << 8)+(basicColors[i][j].b << 16);
+            cols[i*j]=num;
+        }
+    }
 }
 
 void encodeColor(QRgb rgb,Color &colRGB){

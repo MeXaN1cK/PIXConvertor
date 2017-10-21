@@ -63,18 +63,6 @@ void Widget::on_pushButton_clicked()
     QMessageBox *mes = new QMessageBox;
     Convertor *convertor = new Convertor();
     if(!_originalImage.isNull()){
-//        QRgb rgb = img.pixel(159,99);
-//        int r = qRed(rgb);
-//        int g = qGreen(rgb);
-//        int b = qBlue(rgb);
-//        int hex = rgbToHex(rgb);
-//        QString HEX = QString::number(hex);
-//        QString R = QString::number(r);
-//        QString G = QString::number(g);
-//        QString B = QString::number(b);
-//        QString str ="R: "+R+" G: "+G+" B: "+B+" Hex: "+HEX;
-//        mes->setText(str);
-//        mes->show();
         convertor->convert(_originalImage);
 
     }
