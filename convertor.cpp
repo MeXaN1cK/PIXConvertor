@@ -71,12 +71,9 @@ int deflate(QRgb rgb){
  int idxB = qBlue(rgb)* 255 * (blues - 1.0) / 0xFF + 0.5;
  int compressed = 16 + idxR * greens * blues + idxG * blues + idxB;
  for(int i=0;i<16;i++){
-     if(delta(inflate(compressed),rgb)<delta(inflate(i),rgb))
-         return compressed;
-     else
-         return greys[i];
+     if(delta(inflate(i),rgb)<delta(inflate(compressed),rgb)) compressed=i;
  }
- return 0;
+ return compressed;
 }
 
 QRgb inflate(int value){
