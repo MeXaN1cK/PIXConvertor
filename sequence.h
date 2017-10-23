@@ -2,18 +2,17 @@
 #define SEQUENCE_H
 
 
-class Sequence
-{
+class Sequence {
 public:
-    Sequence(Color Fore, Color Back){
-        fore = Fore;
-        back = Back;
-    }
-    ~Sequence(){}
-bool add(Color upper,Color lower);
+    Sequence(Color, Color);
+    Sequence();
+    ~Sequence();
+bool add(Color, Color);
+
 private:
-    bool EqvColor(Color first, Color second);
-    bool fits(Color a, Color b);
+    bool EqvColor(Color, Color);
+    bool fits(Color, Color);
+    Color fore, back;
 };
 
 #endif // SEQUENCE_H
