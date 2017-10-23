@@ -9,19 +9,6 @@
 #include <vector>
 #include <utility>
 
-struct Color {
-    uint8_t r, g, b;
-};
-
-struct Pair_Color {
-    Color bcolor, fcolor;
-    int count;
-};
-
-struct Len {
-    float x, y;
-};
-
 const int reds=6;
 const int greens=8;
 const int blues=5;
