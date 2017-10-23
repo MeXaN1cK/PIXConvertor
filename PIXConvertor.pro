@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         widget.cpp \
-    convertor.cpp
+    convertor.cpp \
+    sequence.cpp
 
 HEADERS += \
         widget.h \
-    convertor.h
+    convertor.h \
+    sequence.h
 
 FORMS += \
         widget.ui

@@ -1,4 +1,5 @@
 #include "convertor.h"
+#include "sequence.h"
 #include <QString>
 #include <QPixmap>
 #include <QFileDialog>
@@ -39,7 +40,7 @@ void Convertor::convert(QPixmap pixmap) {
     int imageWidth = img.width();
     int imageHeight = img.height();
     
-    Color basicColors[160][100];
+    Color basicColors[160][100]; // massive with basic colors of image.
     for(int i=0; i < imageWidth; i++){
         for(int j=0; j < imageHeight; j++){
             QRgb rgb = img.pixel(i,j);
@@ -67,11 +68,12 @@ void Convertor::convert(QPixmap pixmap) {
                 }
             }
             if(push){
-                Pair_Color pair = {bcolor, fcolor, 1};
+                Pair_Color pair = {bcolor, fcolor, 1}; //Basic back and foreground.
                 pair_statistics.push_back(pair);
             }
         }
     }
+
 }
 
 void encodeColor(QRgb rgb, Color &colRGB) {
