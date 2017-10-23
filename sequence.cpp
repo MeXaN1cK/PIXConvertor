@@ -36,5 +36,6 @@ bool Sequence::add(Color upper,Color lower) {
             str.push_back(LOWER);
         else if(EqvColor(upper,back) && EqvColor(lower,back))
             str.push_back(EMPTY);
+     return true;
      } else return false;
 }
