@@ -1,3 +1,4 @@
+
 # PIXConvertor
 ### by MeXaN1cK with C++ and QT Creator
 
@@ -16,3 +17,5 @@ Image converter for OpenComputers PIX image format
 **Render tool for OpenComputers** (WIP)
 
 [IRC support channel](http://webchat.esper.net/?channels=#cc.ru)
+=======
+# PIXConvertor by MeXaN1cK with C++ and QT Creator.
