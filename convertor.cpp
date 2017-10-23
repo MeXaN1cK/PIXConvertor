@@ -69,17 +69,10 @@ void Convertor::convert(QPixmap pixmap) {
         }
     }
     std::list<Sequence> list;
-    Sequence *current;
     for(int y = 0; y < imageHeight/2; y++){
         for(int x = 0; x < imageWidth; x++){
             QRgb upper = inflate(deflate(colorToRgb(basicColors[x][y*2])));
             QRgb lower = inflate(deflate(colorToRgb(basicColors[x][y*2+1])));
-            if(current==NULL || current->str.size() >=255 || x==0 || !current->add(upper,lower)){
-                if(current != NULL){
-                    list.push_back(current);
-                    current = Sequence.Sequence(upper,lower,x+1,y+1);
-                }
-            }
         }
     }
 }
