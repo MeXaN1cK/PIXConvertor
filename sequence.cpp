@@ -5,17 +5,13 @@ const int LOWER = 0;
 const int UPPER = 1;
 const int FULL = 2;
 const int EMPTY = 3;
+std::list<int> str={UPPER};
 
-Sequence::Sequence(Color Fore, Color Back) {
-        this->fore = Fore;
-        this->back = Back;
-}
+//Sequence::Sequence(Color Fore, Color Back) {
+//        this->fore = Fore;
+//        this->back = Back;
+//}
 
-Sequence::Sequence() {
-      Color fore;
-      Color back;
-      std::list<int> str={UPPER};
-}
 bool Sequence::EqvColor(Color first, Color second) {
     if(first.r == second.r && first.g == second.g && first.b == second.b)
         return true;
@@ -28,6 +24,11 @@ bool Sequence::fits(Color a, Color b) {
         return true;
     else
         return false;
+}
+
+Sequence::Sequence(Color Fore, Color Back){
+    fore = Fore;
+    back = Back;
 }
 
 bool Sequence::add(Color upper,Color lower) {
