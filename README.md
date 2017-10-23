@@ -1,1 +1,1 @@
-# PIXConvertor by MeXaN1cK with c++ and QT Creator.
+# PIXConvertor by MeXaN1cK with C++ and QT Creator.
