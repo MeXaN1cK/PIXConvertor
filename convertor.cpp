@@ -17,6 +17,14 @@ const float greys[16] = {
     0.52734375, 0.5859375, 0.64453125, 0.703125, 0.76171875, 0.8203125, 0.87890625, 0.9375
 };
 
+QRgb colorToRgb(Color color){
+    int r = color.r;
+    int g = color.g;
+    int b = color.b;
+    QRgb rgb = qRgb(r, g, b);
+    return rgb;
+}
+
 bool compare_color(Color c1, Color c2){
     return c1.r == c2.r && c1.g == c2.g && c1.b == c2.b;
 }
@@ -60,7 +68,20 @@ void Convertor::convert(QPixmap pixmap) {
             }
         }
     }
-
+    std::list<Sequence> list;
+    Sequence *current;
+    for(int y = 0; y < imageHeight/2; y++){
+        for(int x = 0; x < imageWidth; x++){
+            QRgb upper = inflate(deflate(colorToRgb(basicColors[x][y*2])));
+            QRgb lower = inflate(deflate(colorToRgb(basicColors[x][y*2+1])));
+            if(current==NULL || current->str.size() >=255 || x==0 || !current->add(upper,lower)){
+                if(current != NULL){
+                    list.push_back(current);
+                    current = Sequence.Sequence(upper,lower,x+1,y+1);
+                }
+            }
+        }
+    }
 }
 
 void encodeColor(QRgb rgb, Color &colRGB) {

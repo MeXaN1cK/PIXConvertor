@@ -6,7 +6,7 @@ class Sequence
 {
 public:
 std::list<int> str;
-Sequence(Color Fore, Color Back);
+Sequence(Color Fore, Color Back,int x,int y);
 ~Sequence(){}
 bool add(Color upper,Color lower);
 private:

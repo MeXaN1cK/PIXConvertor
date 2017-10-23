@@ -21,7 +21,7 @@ bool Sequence::fits(Color a, Color b) {
         return false;
 }
 
-Sequence::Sequence(Color Fore, Color Back){
+Sequence::Sequence(Color Fore, Color Back,int x,int y){
     fore = Fore;
     back = Back;
 }
