@@ -9,7 +9,12 @@
 #include <utility>
 
 struct Color {
-    uint8_t r,g,b;
+    uint8_t r, g, b;
+};
+
+struct Pair_Color {
+    Color bcolor, fcolor;
+    int count;
 };
 
 struct Len {
@@ -23,6 +28,10 @@ const float greys[16] = {
     0.05859375, 0.1171875, 0.17578125, 0.234375, 0.29296875, 0.3515625, 0.41015625, 0.46875,
     0.52734375, 0.5859375, 0.64453125, 0.703125, 0.76171875, 0.8203125, 0.87890625, 0.9375
 };
+
+bool compare_color(Color c1, Color c2){
+    return c1.r == c2.r && c1.g == c2.g && c1.b == c2.b;
+}
 
 void Convertor::convert(QPixmap pixmap) {
     QImage img = pixmap.toImage();
@@ -40,11 +49,27 @@ void Convertor::convert(QPixmap pixmap) {
         }
     }
     
-    int cols[16000];
-    for(int i=0; i < imageWidth;i++){
-        for(int j=0; j < imageHeight;j++){
-            int num = basicColors[i][j].r + (basicColors[i][j].b << 8) + (basicColors[i][j].b << 16);
-            cols[i * j]=num;
+    Pair_Color max_pair;
+    std::vector<Pair_Color> pair_statistics;
+    for(int i = 0; i < imageWidth; i++){
+        for(int j = 0; j < imageHeight / 2;j += 2){
+            Color bcolor = basicColors[i][j];
+            Color fcolor = basicColors[i][j + 1];
+            bool push = true;
+            for(int q = 0; q < pair_statistics.size(); q++){
+                Pair_Color pair = pair_statistics[q];
+                if(compare_color(pair.bcolor, bcolor) && compare_color(pair.fcolor, fcolor)){
+                    pair.count++;
+                    push = false;
+                    if(pair.count > max_pair.count){
+                        max_pair = pair;
+                    }
+                }
+            }
+            if(push){
+                Pair_Color pair = {bcolor, fcolor, 1};
+                pair_statistics.push_back(pair);
+            }
         }
     }
 }
