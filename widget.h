@@ -11,6 +11,7 @@
 #include <QMessageBox>
 #include <string>
 #include <sstream>
+#include <QObject>
 
 namespace Ui {
 class Widget;

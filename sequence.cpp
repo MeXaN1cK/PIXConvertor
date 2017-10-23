@@ -7,11 +7,6 @@ const int FULL = 2;
 const int EMPTY = 3;
 std::list<int> str={UPPER};
 
-//Sequence::Sequence(Color Fore, Color Back) {
-//        this->fore = Fore;
-//        this->back = Back;
-//}
-
 bool Sequence::EqvColor(Color first, Color second) {
     if(first.r == second.r && first.g == second.g && first.b == second.b)
         return true;
