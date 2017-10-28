@@ -1,19 +1,18 @@
+# PIXConverter
+Created by MeXaN1cK; written in C++ using QT Creator.
 
-# PIXConvertor
-### by MeXaN1cK with C++ and QT Creator
-
-Image converter for OpenComputers PIX image format
+Converts images to OpenComputers PIX image format.
 
 ### Features of the format
 * Small file size
-* Half-block pixels support
-* Convenient converter included
-* Fast render speed
+* Half-block pixel support, allowing for twice as bigger max image height
+* Convenient converter included (well, as you may have guessed, I'm talking
+  about this repo, yeah)
+* High render speed — probably, relatively, whatever
 * Simple binary structure
 
 ### See also
-[JVM port of Converter](https://github.com/cc-ru/pix)
-
-**Render tool for OpenComputers** (WIP)
-
-[IRC support channel](http://webchat.esper.net/?channels=#cc.ru)
+* Another [converter, Kotlin version](https://github.com/cc-ru/pix)
+* **Render tool for OpenComputers** (WIP)
+* Our [IRC channel](http://webchat.esper.net/?channels=#cc.ru) for support and
+  random talks
